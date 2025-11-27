@@ -1,0 +1,28 @@
+
+name: Automação do Projeto IA Generativa
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Validar Markdown
+        uses: avto-dev/markdown-lint@v1
+        with:
+          config: '.markdownlint.json'
+
+  gerar-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar LibreOffice
+        run: sudo apt-get update && sudo apt-get install -y libreoffice
+
+      - name: Converter PPTX para PDF
+        run: libreoffice --headless --convert-to pdf Apresentação.pptx --outdir ./docs
