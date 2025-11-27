@@ -1,6 +1,11 @@
 # 📘 Desafio de Projeto – Plano de Aula Interativo e Personalizado com Ecossistema IA
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-blue)  ![CI](https://img.shields.io/github/actions/workflow/status/seuusuario/plano-aula-ia/main.yml?label=CI)  ![Licença](https://img.shields.io/badge/licença-MIT-green)  
+
+
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-blue) ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![CI](https://github.com/jfcampos5/Plano-de-aula-interativo-IA-/actions/workflows/main.yml/badge.svg)
+![Último Commit](https://img.shields.io/github/last-commit/jfcampos5/Plano-de-aula-interativo-IA-)
+![Markdown Lint](https://img.shields.io/badge/Markdown-Lint-success)
 
 ---
 
@@ -34,13 +39,21 @@ A proposta é aplicar conceitos de Inteligência Artificial em um contexto educa
 
 ---
 
+
+## 🚀 Como Usar
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/jfcampos5/Plano-de-aula-interativo-IA-.git
+
+---
+
 ## 🏗️ Estrutura do Repositório
 ```plaintext
 plano-aula-ia/
 ├── README.md                  # Documentação principal
 ├── .markdownlint.json         # Configuração para validação Markdown
 ├── .github/workflows/main.yml # Workflow de automação
-├── images/                    # Capturas de tela e diagramas (opcional)
+├── images/                    # Capturas de tela e diagramas (em atualização)
 └── docs/                      # Materiais complementares (opcional)
 ```
 
