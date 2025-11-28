@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quiz Interativo</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg, #4f46e5, #7c3aed);
+color: #fff;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+.quiz-container {
+background: rgba(255, 255, 255, 0.1);
+padding: 30px;
+border-radius: 12px;
+width: 100%;
+max-width: 500px;
+backdrop-filter: blur(10px);
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+h2 {
+margin-bottom: 20px;
+font-size: 22px;
+}
+.option {
+background: rgba(255, 255, 255, 0.2);
+padding: 12px;
+border-radius: 8px;
+margin: 10px 0;
+cursor: pointer;
+transition: 0.3s;
+}
+.option:hover {
+background: rgba(255, 255, 255, 0.3);
+}
+#result {
+margin-top: 20px;
+font-size: 20px;
+font-weight: bold;
+text-align: center;
+}
+button {
+width: 100%;
+margin-top: 20px;
+padding: 12px;
+border: none;
+border-radius: 8px;
+background: #22c55e;
+color: #fff;
+cursor: pointer;
+font-size: 16px;
+}
+</style>
+</head>
+<body>
+<div class="quiz-container">
+<h2 id="question"></h2>
+<div id="options"></div>
+<button onclick="nextQuestion()">Próxima Pergunta</button>
+<div id="result"></div>
+</div>
+
+
+<script>
+const quiz = [
+{
+question: "Qual tag HTML é usada para criar um parágrafo?",
+options: ["<p>", "<paragraph>", "<text>", "<h1>"],
+</html>
