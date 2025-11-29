@@ -1,42 +1,223 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Projeto Quiz</title>
+<title>Quiz IA Generativa</title>
 <style>
 body {
-font-family: Arial;
-background: #f3f4f6;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff;
+  0;
 }
-.card {
-background: #fff;
-padding: 30px;
-border-radius: 10px;
-text-align: center;
-box-shadow: 0 0 15px rgba(0,0,0,0.1);
+.box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
-a {
-text-decoration: none;
-background: #4f46e5;
-color: #fff;
-padding: 12px 20px;
-border-radius: 8px;
-display: inline-block;
-margin-top: 15px;
+.option {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  border-radius: 8px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.option:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+button {
+ -radius: 8px;
+  background: #22c55e;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+button:hover {
+  background: #16a34a;
+}
+#score, #timer {
+  margin-top: 10px;
+  font-size: 16px;
+}
+.progress-container {
+  width: 100%;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  margin-top: 15px;
+  height: 20px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  transition: width 0.4s ease;
+}
+#progress-text {
+  margin-top: 8px;
+  font-size: 14px;
+}
+.timer-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.timer-box span {
+  font-size: 14px;
 }
 </style>
 </head>
 <body>
-<div class="card">
-<h1>Bem-vindo ao Quiz!</h1>
-<p>Clique abaixo para iniciar.</p>
-<a href="quizzes.html">Iniciar Quiz</a>
+<div class="box">
+  <h2 id="q">Clique para iniciar o quiz!</h2>
+  <div id="opts"></div>
+  <button onclick="loadQuestion()">Iniciar / Próxima Pergunta</button>
+  <button onclick="resetQuiz()" style="background:#ef4444;">Reiniciar Quiz</button>
+  <p id="r"></p>
+  <p id="score">Pontuação: 0</p>
+  <div class="timer-box">
+    <span id="total-time">Tempo total: 15:00</span>
+    <span id="question-time">Tempo da questão: 60s</span>
+  </div>
+  <div class="progress-container">
+    <div class="progress-bar" id="progress"></div>
+  </div>
+  <p id="progress-text">Progresso: 0% (0 de 15)</p>
 </div>
+
+<script>
+const questions = [
+  { question: "O que é IA generativa?", options: ["IA que gera conteúdo novo", "IA que apenas classifica dados", "IA que não aprende", "IA baseada em hardware"], correct: 0 },
+  { question: "Qual modelo é usado para gerar texto?", options: ["CNN", "GPT", "ResNet", "GAN"], correct: 1 },
+  { question: "Qual ferramenta pode gerar código automaticamente?", options: ["Copilot", "Photoshop", "Excel", "Word"], correct: 0 },
+  { question: "Qual é um exemplo de aplicação de IA generativa em imagens?", options: ["DALL·E", "MySQL", "React", "Docker"], correct: 0 },
+  { question: "Qual é um risco ético associado à IA generativa?", options: ["Deepfakes", "Melhoria da criatividade", "Aumento da produtividade", "Automação segura"], correct: 0 },
+  { question: "Qual modelo é base do ChatGPT?", options: ["GPT", "BERT", "LSTM", "CNN"], correct: 0 },
+  { question: "Qual é uma vantagem do uso de IA generativa em educação?", options: ["Personalização do aprendizado", "Redução da criatividade", "Aumento de erros", "Menos interação"], correct: 0 },
+  { question: "Qual é uma prática recomendada para segurança ao usar IA?", options: ["Verificar fontes", "Aceitar tudo sem revisão", "Compartilhar dados sensíveis", "Ignorar políticas"], correct: 0 },
+  { question: "Qual é a diferença entre IA tradicional e IA generativa?", options: ["IA generativa cria conteúdo novo", "IA tradicional é mais criativa", "IA generativa não aprende", "Não há diferença"], correct: 0 },
+  { question: "Qual ferramenta pode ser usada para criar conteúdo interativo com IA?", options: ["ChatGPT", "Excel", "PowerPoint", "Notepad"], correct: 0 },
+  { question: "Qual é um exemplo de IA generativa para música?", options: ["Jukebox", "TensorFlow", "Docker", "MongoDB"], correct: 0 },
+  { question: "Qual é o papel do GitHub na documentação de projetos com IA?", options: ["Hospedar código e documentação", "Criar imagens", "Gerar vídeos", "Executar IA"], correct: 0 },
+  { question: "Qual é uma limitação atual da IA generativa?", options: ["Pode gerar informações incorretas", "Sempre é 100% precisa", "Não precisa de dados", "Não usa modelos"], correct: 0 },
+  { question: "Qual é um exemplo de uso ético de IA generativa?", options: ["Criar conteúdo educativo", "Produzir fake news", "Manipular pessoas", "Roubar dados"], correct: 0 },
+  { question: "Qual é uma aplicação prática do Copilot?", options: ["Sugestão de código", "Edição de vídeo", "Criação de imagens", "Gerar música"], correct: 0 }
+];
+
+let current;
+let score = 0;
+let answered = 0;
+const totalQuestions = 15;
+let totalTime = 15 * 60; // 15 minutos
+let questionTime = 60; // 1 minuto por questão
+let totalTimerInterval;
+let questionTimerInterval;
+
+function loadQuestion() {
+  if (answered >= totalQuestions) {
+    endQuiz("🎉 Quiz concluído!");
+    return;
+  }
+
+  current = questions[Math.floor(Math.random() * questions.length)];
+  document.getElementById("q").innerText = current.question;
+  const opts = document.getElementById("opts");
+  opts.innerHTML = "";
+  document.getElementById("r").innerText = "";
+
+  current.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    div.innerText = opt;
+    div.onclick = () => check(i);
+    opts.appendChild(div);
+  });
+
+  resetQuestionTimer();
+  if (!totalTimerInterval) startTotalTimer();
+}
+
+function check(i) {
+  if (i === current.correct) {
+    document.getElementById("r").innerText = "✅ Acertou!";
+    score++;
+  } else {
+    document.getElementById("r").innerText = "❌ Errou!";
+  }
+  answered++;
+  updateProgress();
+  document.getElementById("score").innerText = `Pontuação: ${score}`;
+  clearInterval(questionTimerInterval);
+}
+
+function updateProgress() {
+  const percent = Math.round((answered / totalQuestions) * 100);
+  document.getElementById("progress").style.width = percent + "%";
+  document.getElementById("progress-text").innerText = `Progresso: ${percent}% (${answered} de ${totalQuestions})`;
+}
+
+function startTotalTimer() {
+  totalTimerInterval = setInterval(() => {
+    totalTime--;
+    const min = Math.floor(totalTime / 60);
+    const sec = totalTime % 60;
+    document.getElementById("total-time").innerText = `Tempo total: ${min}:${sec < 10 ? "0" + sec : sec}`;
+    if (totalTime <= 0) {
+      endQuiz("⏳ Tempo total esgotado!");
+    }
+  }, 1000);
+}
+
+function resetQuestionTimer() {
+  clearInterval(questionTimerInterval);
+  questionTime = 60;
+  document.getElementById("question-time").innerText = `Tempo da questão: ${questionTime}s`;
+  questionTimerInterval = setInterval(() => {
+    questionTime--;
+    document.getElementById("question-time").innerText = `Tempo da questão: ${questionTime}s`;
+    if (questionTime <= 0) {
+      clearInterval(questionTimerInterval);
+      answered++;
+      updateProgress();
+      loadQuestion(); // Avança automaticamente
+    }
+  }, 1000);
+}
+
+function endQuiz(message) {
+  clearInterval(totalTimerInterval);
+  clearInterval(questionTimerInterval);
+  totalTimerInterval = null;
+  questionTimerInterval = null;
+  document.getElementById("q").innerText = message;
+  document.getElementById("opts").innerHTML = "";
+  document.getElementById("r").innerText = `Pontuação final: ${score}`;
+}
+
+function resetQuiz() {
+  score = 0;
+  answered = 0;
+  totalTime = 15 * 60;
+  clearInterval(totalTimerInterval);
+  clearInterval(questionTimerInterval);
+  totalTimerInterval = null;
+  questionTimerInterval = null;
+  updateProgress();
+  document.getElementById("score").innerText = "Pontuação: 0";
+  document.getElementById("total-time").innerText = "Tempo total: 15:00";
+  document.getElementById("question-time").innerText = "Tempo da questão: 60s";
+  document.getElementById("q").innerText = "Clique para iniciar o quiz!";
+  document.getElementById("opts").innerHTML = "";
+  document.getElementById("r").innerText = "";
+}
+</script>
 </body>
-</html>
