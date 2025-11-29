@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,7 +9,8 @@ body {
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #4f46e5, #7c3aed);
   color: #fff;
-  0;
+ vh;
+  margin: 0;
 }
 .box {
   background: rgba(255, 255, 255, 0.1);
@@ -21,6 +21,7 @@ body {
   backdrop-filter: blur(10px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   text-align: center;
+  transition: opacity 0.5s ease;
 }
 .option {
   background: rgba(255, 255, 255, 0.2);
@@ -33,12 +34,19 @@ body {
 .option:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+ background: #22c55e !important;
+}
+.incorrect {
+  background: #ef4444 !important;
+}
 button {
- -radius: 8px;
+  border-radius: 8px;
   background: #22c55e;
   color: #fff;
   cursor: pointer;
   font-size: 16px;
+  padding: 10px 15px;
+  margin: 5px;
   transition: 0.3s;
 }
 button:hover {
@@ -77,7 +85,7 @@ button:hover {
 </style>
 </head>
 <body>
-<div class="box">
+<div class="box" id="quiz-box">
   <h2 id="q">Clique para iniciar o quiz!</h2>
   <div id="opts"></div>
   <button onclick="loadQuestion()">Iniciar / Próxima Pergunta</button>
@@ -85,84 +93,100 @@ button:hover {
   <p id="r"></p>
   <p id="score">Pontuação: 0</p>
   <div class="timer-box">
-    <span id="total-time">Tempo total: 15:00</span>
+    <span id="total-time">Tempo total: 20:00</span>
     <span id="question-time">Tempo da questão: 60s</span>
   </div>
   <div class="progress-container">
     <div class="progress-bar" id="progress"></div>
   </div>
-  <p id="progress-text">Progresso: 0% (0 de 15)</p>
+  <p id="progress-text">Progresso: 0% (0 de 20)</p>
 </div>
 
 <script>
 const questions = [
-  { question: "O que é IA generativa?", options: ["IA que gera conteúdo novo", "IA que apenas classifica dados", "IA que não aprende", "IA baseada em hardware"], correct: 0 },
-  { question: "Qual modelo é usado para gerar texto?", options: ["CNN", "GPT", "ResNet", "GAN"], correct: 1 },
-  { question: "Qual ferramenta pode gerar código automaticamente?", options: ["Copilot", "Photoshop", "Excel", "Word"], correct: 0 },
-  { question: "Qual é um exemplo de aplicação de IA generativa em imagens?", options: ["DALL·E", "MySQL", "React", "Docker"], correct: 0 },
-  { question: "Qual é um risco ético associado à IA generativa?", options: ["Deepfakes", "Melhoria da criatividade", "Aumento da produtividade", "Automação segura"], correct: 0 },
-  { question: "Qual modelo é base do ChatGPT?", options: ["GPT", "BERT", "LSTM", "CNN"], correct: 0 },
-  { question: "Qual é uma vantagem do uso de IA generativa em educação?", options: ["Personalização do aprendizado", "Redução da criatividade", "Aumento de erros", "Menos interação"], correct: 0 },
-  { question: "Qual é uma prática recomendada para segurança ao usar IA?", options: ["Verificar fontes", "Aceitar tudo sem revisão", "Compartilhar dados sensíveis", "Ignorar políticas"], correct: 0 },
-  { question: "Qual é a diferença entre IA tradicional e IA generativa?", options: ["IA generativa cria conteúdo novo", "IA tradicional é mais criativa", "IA generativa não aprende", "Não há diferença"], correct: 0 },
-  { question: "Qual ferramenta pode ser usada para criar conteúdo interativo com IA?", options: ["ChatGPT", "Excel", "PowerPoint", "Notepad"], correct: 0 },
-  { question: "Qual é um exemplo de IA generativa para música?", options: ["Jukebox", "TensorFlow", "Docker", "MongoDB"], correct: 0 },
-  { question: "Qual é o papel do GitHub na documentação de projetos com IA?", options: ["Hospedar código e documentação", "Criar imagens", "Gerar vídeos", "Executar IA"], correct: 0 },
-  { question: "Qual é uma limitação atual da IA generativa?", options: ["Pode gerar informações incorretas", "Sempre é 100% precisa", "Não precisa de dados", "Não usa modelos"], correct: 0 },
-  { question: "Qual é um exemplo de uso ético de IA generativa?", options: ["Criar conteúdo educativo", "Produzir fake news", "Manipular pessoas", "Roubar dados"], correct: 0 },
-  { question: "Qual é uma aplicação prática do Copilot?", options: ["Sugestão de código", "Edição de vídeo", "Criação de imagens", "Gerar música"], correct: 0 }
+  { question: "Qual é um dos principais desafios éticos da IA generativa?", options: ["Aumentar a produtividade","Melhor criatividade","Evitar vieses e desinformação","Reduzir custos"], correct: 2 },
+  { question: "O que significa 'transparência algorítmica'?", options: ["Tornar os algoritmos secretos","Explicar como os modelos tomam decisões","Esconder dados de treinamento","Usar IA apenas em empresas privadas"], correct: 1 },
+  { question: "Qual prática ajuda a reduzir vieses em IA?", options: ["Usar menos dados","Diversidade ignorante","Treinar com dados variados e representativos","Focar apenas em dados de um país"], correct: 2 },
+  { question: "Qual é uma preocupação ética relacionada ao uso de dados pessoais em IA?", options: ["Aumentar a velocidade dos algoritmos","Melhorar a estética das interfaces","Garantir privacidade e proteção dos usuários","Reduzir custos de armamento"], correct: 2 },
+  { question: "O que significa 'responsabilidade no uso da IA'?", options: ["Delegar todas as decisões à máquina","Usar IA apenas em ambientes acadêmicos","Garantir que os humanos assumam a responsabilidade pelas consequências das decisões da IA","Evitar qualquer regulamentação"], correct: 2 },
+  { question: "Qual é um risco da falta de regulamentação da IA?", options: ["Maior inovação tecnológica","Redução de custos operacionais","Uso indevido e impactos sociais negativos","Aumento da criatividade artística"], correct: 2 },
+  { question: "Qual destas áreas já utiliza IA generativa de forma significativa?", options: ["Agricultura","Medicina","Educação","Todas as anteriores"], correct: 3 },
+  { question: "Em educação, qual é um uso positivo da IA generativa?", options: ["Substituir professores","Criar materiais personalizados para alunos","Debates eliminatórios em sala","Reduzir interação humana"], correct: 1 },
+  { question: "Na área da saúde, qual é uma aplicação prática da IA generativa?", options: ["Criar diagnósticos sem supervisão médica","Substituir médicos em cirurgias","Apoiar pesquisas e gerar relatórios médicos","Consultas de presença eliminatórias"], correct: 2 },
+  { question: "Qual é um exemplo de uso da IA generativa em negócios?", options: ["Automatizar apenas tarefas manuais","Reduzir a necessidade de comunicação interna","Criar resumos e campanhas de marketing personalizados","Evitar o uso de dados de clientes"], correct: 2 },
+  { question: "Em artes e cultura, como a IA generativa pode ser aplicada?", options: ["Eliminar artistas humanos","Restringir a criatividade","Produzir músicas, imagens e textos criativos como apoio ao trabalho humano","Substituir totalmente a produção cultural tradicional"], correct: 2 },
+  { question: "Qual aplicação da IA generativa pode ser considerada um risco?", options: ["Criação de arte digital","Apoio em programação","Produção de fake news","Geração de resumos acadêmicos"], correct: 2 },
+  { question: "O que é um 'modelo de linguagem'?", options: ["Um banco de dados simples","Um editor de texto","Um sistema treinado para prever e gerar linguagem humana","Um dicionário digital"], correct: 2 },
+  { question: "Qual técnica é usada para treinar IA generativa?", options: ["Programação manual de registros","Estatísticas básicas","Aprendizado profundo (Deep Learning)","Planilhas Excel"], correct: 2 },
+  { question: "O que significa 'engenharia imediata'?", options: ["Criar algoritmos de negócios","Escrever código em Python","Elaborar instruções eficazes para guiar a IA","Configurar hardware para IA"], correct: 2 },
+  { question: "O que é 'aprendizado de máquina'?", options: ["Um processo de programação manual","Um banco de dados estático","Um método em que sistemas aprendem padrões a partir de dados","Um editor de imagens"], correct: 2 },
+  { question: "Qual é a função dos 'dados de treinamento'?", options: ["Servir apenas como exemplos visuais","Reduzir custos de hardware","Ensinar o modelo a reconhecer padrões e gerar respostas","Substituir algoritmos tradicionais"], correct: 2 },
+  { question: "O que significa 'overfitting' em IA?", options: ["Quando o modelo generaliza bem para novos dados","Quando o modelo ignora os dados de treinamento","Quando o modelo aprende os dados de treino e não generaliza bem","Quando o modelo não pode ser treinado"], correct: 2 },
+  { question: "Qual é a diferença entre IA generativa e IA tradicional?", options: ["A IA generativa apenas organiza dados","Uma IA tradicional cria textos e imagens","A IA generativa produz novos conteúdos, enquanto a tradicional apenas analisa ou classifica","Não existe diferença"], correct: 2 },
+  { question: "O que é 'rede neural artificial'?", options: ["Um sistema de cabos físicos","Um banco de dados relacional","Um modelo inspirado no cérebro humano para processar informações","Um editor de planilhas"], correct: 2 }
 ];
 
-let current;
+let shuffledQuestions = [];
+let currentIndex = 0;
 let score = 0;
-let answered = 0;
-const totalQuestions = 15;
-let totalTime = 15 * 60; // 15 minutos
-let questionTime = 60; // 1 minuto por questão
+let totalQuestions = 20;
+let totalTime = 20 * 60;
+let questionTime = 60;
 let totalTimerInterval;
 let questionTimerInterval;
 
+function shuffleQuestions() {
+  shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+}
+
 function loadQuestion() {
-  if (answered >= totalQuestions) {
+  if (currentIndex >= totalQuestions) {
     endQuiz("🎉 Quiz concluído!");
     return;
   }
-
-  current = questions[Math.floor(Math.random() * questions.length)];
-  document.getElementById("q").innerText = current.question;
-  const opts = document.getElementById("opts");
-  opts.innerHTML = "";
-  document.getElementById("r").innerText = "";
-
-  current.options.forEach((opt, i) => {
-    const div = document.createElement("div");
-    div.className = "option";
-    div.innerText = opt;
-    div.onclick = () => check(i);
-    opts.appendChild(div);
-  });
-
-  resetQuestionTimer();
-  if (!totalTimerInterval) startTotalTimer();
+  const box = document.getElementById("quiz-box");
+  box.style.opacity = 0;
+  setTimeout(() => {
+    const current = shuffledQuestions[currentIndex];
+    document.getElementById("q").innerText = `Pergunta ${currentIndex + 1}: ${current.question}`;
+    const opts = document.getElementById("opts");
+    opts.innerHTML = "";
+    document.getElementById("r").innerText = "";
+    current.options.forEach((opt, i) => {
+      const div = document.createElement("div");
+      div.className = "option";
+      div.innerText = opt;
+      div.onclick = () => check(i, div, current.correct);
+      opts.appendChild(div);
+    });
+    resetQuestionTimer();
+    if (!totalTimerInterval) startTotalTimer();
+    box.style.opacity = 1;
+  }, 500);
 }
 
-function check(i) {
-  if (i === current.correct) {
+function check(i, element, correctIndex) {
+  clearInterval(questionTimerInterval);
+  const options = document.querySelectorAll(".option");
+  options.forEach(opt => opt.style.pointerEvents = "none");
+  if (i === correctIndex) {
+    element.classList.add("correct");
     document.getElementById("r").innerText = "✅ Acertou!";
     score++;
   } else {
+    element.classList.add("incorrect");
+    options[correctIndex].classList.add("correct");
     document.getElementById("r").innerText = "❌ Errou!";
   }
-  answered++;
+  currentIndex++;
   updateProgress();
   document.getElementById("score").innerText = `Pontuação: ${score}`;
-  clearInterval(questionTimerInterval);
 }
 
 function updateProgress() {
-  const percent = Math.round((answered / totalQuestions) * 100);
+  const percent = Math.round((currentIndex / totalQuestions) * 100);
   document.getElementById("progress").style.width = percent + "%";
-  document.getElementById("progress-text").innerText = `Progresso: ${percent}% (${answered} de ${totalQuestions})`;
+  document.getElementById("progress-text").innerText = `Progresso: ${percent}% (${currentIndex} de ${totalQuestions})`;
 }
 
 function startTotalTimer() {
@@ -171,9 +195,8 @@ function startTotalTimer() {
     const min = Math.floor(totalTime / 60);
     const sec = totalTime % 60;
     document.getElementById("total-time").innerText = `Tempo total: ${min}:${sec < 10 ? "0" + sec : sec}`;
-    if (totalTime <= 0) {
-      endQuiz("⏳ Tempo total esgotado!");
-    }
+    if (totalTime === 60) alert("⚠️ Apenas 1 minuto restante!");
+    if (totalTime <= 0) endQuiz("⏳ Tempo total esgotado!");
   }, 1000);
 }
 
@@ -186,9 +209,9 @@ function resetQuestionTimer() {
     document.getElementById("question-time").innerText = `Tempo da questão: ${questionTime}s`;
     if (questionTime <= 0) {
       clearInterval(questionTimerInterval);
-      answered++;
+      currentIndex++;
       updateProgress();
-      loadQuestion(); // Avança automaticamente
+      loadQuestion();
     }
   }, 1000);
 }
@@ -196,28 +219,31 @@ function resetQuestionTimer() {
 function endQuiz(message) {
   clearInterval(totalTimerInterval);
   clearInterval(questionTimerInterval);
-  totalTimerInterval = null;
-  questionTimerInterval = null;
   document.getElementById("q").innerText = message;
   document.getElementById("opts").innerHTML = "";
-  document.getElementById("r").innerText = `Pontuação final: ${score}`;
+  const percentScore = Math.round((score / totalQuestions) * 100);
+  document.getElementById("r").innerText = `Pontuação final: ${score}/${totalQuestions} (${percentScore}%)`;
 }
 
 function resetQuiz() {
   score = 0;
-  answered = 0;
-  totalTime = 15 * 60;
+  currentIndex = 0;
+  totalTime = 20 * 60;
   clearInterval(totalTimerInterval);
   clearInterval(questionTimerInterval);
   totalTimerInterval = null;
   questionTimerInterval = null;
   updateProgress();
   document.getElementById("score").innerText = "Pontuação: 0";
-  document.getElementById("total-time").innerText = "Tempo total: 15:00";
+  document.getElementById("total-time").innerText = "Tempo total: 20:00";
   document.getElementById("question-time").innerText = "Tempo da questão: 60s";
   document.getElementById("q").innerText = "Clique para iniciar o quiz!";
   document.getElementById("opts").innerHTML = "";
   document.getElementById("r").innerText = "";
+  shuffleQuestions();
 }
+
+shuffleQuestions();
 </script>
 </body>
+</html>
