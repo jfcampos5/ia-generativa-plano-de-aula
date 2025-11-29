@@ -8,19 +8,19 @@
 ---
 ## 📑Índice
 1. [Sobre o projeto](#sobre-o-projeto)
-2. [Objetivo de aprendizagem](#objetivo-de-aprendizagem)
+2. [Objetivos de aprendizagem](#objetivos-de-aprendizagem)
 3. [Estrutura do repositório](#estrutura-do-repositorio)
-4. [Plano de aula](#palno-de-aula)
+4. [Plano de aula](#plano-de-aula)
 5. [Materiais complementares](#materiais-complementares)
 6. [Como publicar no GitHub pages](#como-publicar-no-github-pages)
-7. [Quiz intertivo online](#quiz-interativo-online)
-8. [Automação com GitHub Actions](#automação-com-github-actions)
+7. [Quiz interativo online](#quiz-interativo-online)
+8. [Automação com GitHub Actions](#automacao-com-github-actions)
 9. [Boas práticas de manutenção](#boas-praticas-de-manutencao)
 10. [Recursos úteis](#recursos-uteis)
 11. [Entrega](#entrega)
 12. [Conclusão](#conclusao)
 13. [Como contribuir](#como-contribuir)
-14. [Licença](#licena)
+14. [Licença](#licenca)
 
 ---
 
