@@ -9,19 +9,20 @@
 ---
 
 ## 📑 Índice
-1. #-sobre-o-projeto  
-2. #-objetivos-de-aprendizagem  
-3. #-estrutura-do-repositório  
-4. #-plano-de-aula  
-5. #-como-publicar-no-github-pages  
-6. #-quiz-interativo-online  
-7. #-automação-com-github-actions  
-8. #-boas-práticas-de-manutenção  
-9. #-recursos-úteis  
-10. #-entrega  
-11. #-conclusão  
-12. #-como-contribuir  
-13. #-licença  
+1. [Sobre o projeto](#sobre-o-projeto)
+2. [Objetivos de aprendizagem](#objetivos-de-aprendizagem)
+3. [Estrutura do repositório](#estrutura-do-repositorio)
+4. [Plano de aula](#plano-de-aula)
+5. [Materiais complementares](#materiais-complementares)
+6. [Como publicar no GitHub Pages](#como-publicar-no-github-pages)
+7. [Quiz interativo online](#quiz-interativo-online)
+8. [Automação com GitHub Actions](#automacao-com-github-actions)
+9. [Boas práticas de manutenção](#boas-praticas-de-manutencao)
+10. [Recursos úteis](#recursos-uteis)
+11. [Entrega](#entrega)
+12. [Conclusão](#conclusao)
+13. [Como contribuir](#como-contribuir)
+14. [Licença](#licenca)
 
 ---
 
@@ -74,6 +75,19 @@ plano-aula-ia/
 - Ferramentas de IA (Copilot, ChatGPT, DIO Labs)  
 - GitHub para documentação  
 - Quizzes interativos  
+
+---
+
+
+## 📂 Materiais Complementares
+Este repositório inclui recursos adicionais para apoiar o plano de aula:
+
+### Slides e Documentos
+- docs/Plano_de_Aula_IA_Generativa.odp – Slide do plano de aula
+
+
+### Imagens
+- Diagramas e fluxogramas disponíveis na pasta `images/`
 
 ---
 
