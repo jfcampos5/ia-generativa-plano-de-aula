@@ -6,7 +6,7 @@
 ![Markdown Lint](https://img.shields.io/badge/Markdown-Lint-success)
 
 ---
-## 📑Índice
+## Índice
 1. [Sobre o projeto](#sobre-o-projeto)
 2. [Objetivos de aprendizagem](#objetivos-de-aprendizagem)
 3. [Estrutura do repositório](#estrutura-do-repositorio)
@@ -24,13 +24,13 @@
 
 ---
 
-## ✨ Sobre o Projeto
+## Sobre o Projeto
 Este projeto tem como objetivo **criar um Plano de Aula Interativo e Personalizado com Ecossistema IA**, aplicando conceitos de Inteligência Artificial em um contexto educacional.  
 A documentação é organizada para servir como **portfólio** e **referência prática**.
 
 ---
 
-## 🎯 Objetivos de Aprendizagem
+## Objetivos de Aprendizagem
 - Compreender conceitos básicos de IA generativa  
 - Explorar aplicações práticas em diferentes áreas  
 - Desenvolver senso crítico sobre ética e segurança na IA  
@@ -39,7 +39,7 @@ A documentação é organizada para servir como **portfólio** e **referência p
 
 ---
 
-## 🏗️ Estrutura do Repositório
+## Estrutura do Repositório
 ```plaintext
 plano-aula-ia/
 ├── README.md                  # Documentação principal
@@ -52,7 +52,7 @@ plano-aula-ia/
 
 ---
 
-## 📚 Plano de Aula
+## Plano de Aula
 **Tema:** Introdução à IA Generativa  
 **Objetivo:** Apresentar conceitos básicos e demonstrar aplicações práticas.  
 
@@ -77,7 +77,7 @@ plano-aula-ia/
 ---
 
 
-## 📂 Materiais Complementares
+## Materiais Complementares
 Este repositório inclui recursos adicionais para apoiar o plano de aula:
 
 ### Slides e Documentos
@@ -89,7 +89,7 @@ Este repositório inclui recursos adicionais para apoiar o plano de aula:
 
 ---
 
-## 🌐 Como Publicar no GitHub Pages
+## Como Publicar no GitHub Pages
 1. Crie a pasta `docs/` e coloque os arquivos HTML do projeto nela.  
 2. Vá em **Settings > Pages** no repositório.  
 3. Em **Source**, selecione a branch `main` e a pasta `/docs`.  
@@ -99,7 +99,7 @@ Este repositório inclui recursos adicionais para apoiar o plano de aula:
 
 ---
 
-## 🧩 Quiz Interativo Online
+## Quiz Interativo Online
 Acesse o quiz diretamente pelo GitHub Pages:  
 👉 **https://jfcampos5.github.io/ia-generativa-plano-de-aula/**  
 
@@ -117,14 +117,14 @@ open index.html
 
 ---
 
-## 🔄 Automação com GitHub Actions
+## Automação com GitHub Actions
 - Validação do Markdown com **markdownlint**  
 - Conversão automática de apresentações para PDF  
 - Workflow: `.github/workflows/main.yml`  
 
 ---
 
-## ✅ Boas Práticas de Manutenção
+## Boas Práticas de Manutenção
 - Mantenha o README atualizado  
 - Use **issues** para registrar melhorias  
 - Padronize nomes de arquivos e pastas  
@@ -132,14 +132,14 @@ open index.html
 
 ---
 
-## 🔗 Recursos Úteis
+## Recursos Úteis
 - https://www.markdownguide.org/basic-syntax/  
 - https://docs.github.com/en/pages  
 - https://www.dio.me  
 
 ---
 
-## ✅ Entrega
+## Entrega
 Este repositório contém:  
 - Um arquivo **README.md** detalhado  
 - Estrutura organizada para documentação  
@@ -148,13 +148,13 @@ Este repositório contém:
 
 ---
 
-## 🚀 Conclusão
+## Conclusão
 Este projeto demonstra como aplicar **IA e boas práticas de documentação** em um plano de aula interativo.  
 Além de atender ao desafio da DIO, serve como portfólio para destacar habilidades técnicas e de comunicação.
 
 ---
 
-## 🤝 Como Contribuir
+## Como Contribuir
 1. Faça um fork  
 2. Crie uma branch: `git checkout -b minha-feature`  
 3. Commit: `git commit -m 'Minha nova feature'`  
@@ -163,5 +163,5 @@ Além de atender ao desafio da DIO, serve como portfólio para destacar habilida
 
 ---
 
-## 📜 Licença
+## Licença
 Este projeto está licenciado sob a MIT License.  
